@@ -97,6 +97,15 @@ app_license = "MIT"
 #	}
 # }
 
+doc_events = {
+	"POS Invoice": {
+		"on_submit": "e_invoice.app.set_invoice_qr",
+	},
+	"Sales Invoice": {
+		"on_submit": "e_invoice.app.set_sales_invoice_qr",
+	}
+}
+
 # Scheduled Tasks
 # ---------------
 
@@ -173,3 +182,22 @@ user_data_fields = [
 # 	"e_invoice.auth.validate"
 # ]
 
+fixtures = [
+	{"dt": "Custom Field", "filters": [
+		[
+			"name", "in", [
+				"POS Invoice-einvoice_status",
+				"POS Invoice-signed_qr_code",
+				"POS Invoice-column_break_133",
+				"POS Invoice-qr_code_file",
+				"POS Invoice-qr_code_details",
+				"Sales Invoice-e_invoice_status",
+				"Sales Invoice-qr_code_file",
+				"Sales Invoice-qr_code_image",
+				"Sales Invoice-column_break_138",
+				"Sales Invoice-einvoice_status",
+				"Sales Invoice-signed_qr_code"
+			]
+		]
+	]}
+]
