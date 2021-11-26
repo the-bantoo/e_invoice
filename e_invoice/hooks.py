@@ -186,16 +186,16 @@ fixtures = [
 	{"dt": "Custom Field", "filters": [
 		[
 			"name", "in", [
+				"POS Invoice-qr_code",
 				"POS Invoice-einvoice_status",
 				"POS Invoice-signed_qr_code",
 				"POS Invoice-column_break_133",
 				"POS Invoice-qr_code_file",
 				"POS Invoice-qr_code_details",
+				"Sales Invoice-qr_code",
 				"Sales Invoice-e_invoice_status",
 				"Sales Invoice-qr_code_file",
-				"Sales Invoice-qr_code_image",
 				"Sales Invoice-column_break_138",
-				"Sales Invoice-einvoice_status",
 				"Sales Invoice-signed_qr_code"
 			]
 		]
@@ -203,7 +203,8 @@ fixtures = [
 	{"dt": "Print Format", "filters": [
 		[
 			"name", "in", [
-				"E-Invoice Saudi"
+				"E-Invoice Saudi",
+				"Saudi VAT Invoice"
 			]
 		]
 	]}
