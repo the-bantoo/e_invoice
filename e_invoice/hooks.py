@@ -99,10 +99,10 @@ app_license = "MIT"
 
 doc_events = {
 	"POS Invoice": {
-		"on_submit": "e_invoice.app.set_invoice_qr",
+		"after_insert": "e_invoice.app.set_invoice_qr",
 	},
 	"Sales Invoice": {
-		"on_submit": "e_invoice.app.set_sales_invoice_qr",
+		"on_update": "e_invoice.app.create_sales_invoice_qr",
 	}
 }
 
@@ -197,6 +197,13 @@ fixtures = [
 				"Sales Invoice-column_break_138",
 				"Sales Invoice-einvoice_status",
 				"Sales Invoice-signed_qr_code"
+			]
+		]
+	]},
+	{"dt": "Print Format", "filters": [
+		[
+			"name", "in", [
+				"E-Invoice Saudi"
 			]
 		]
 	]}
