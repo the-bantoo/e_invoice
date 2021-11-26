@@ -186,6 +186,7 @@ fixtures = [
 	{"dt": "Custom Field", "filters": [
 		[
 			"name", "in", [
+				"Company-company_name_in_arabic",
 				"POS Invoice-qr_code",
 				"POS Invoice-einvoice_status",
 				"POS Invoice-signed_qr_code",
