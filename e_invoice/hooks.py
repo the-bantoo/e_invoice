@@ -99,11 +99,10 @@ app_license = "MIT"
 
 doc_events = {
 	"POS Invoice": {
-		"after_insert": "e_invoice.app.set_invoice_qr",
+		"after_insert": "e_invoice.app.create_pos_invoice_qr",
 	},
 	"Sales Invoice": {
-		"after_insert": "e_invoice.app.create_sales_invoice_qr",
-		"on_update": "e_invoice.app.create_sales_invoice_qr",
+		"after_insert": "e_invoice.app.create_sales_invoice_qr"
 	}
 }
 
