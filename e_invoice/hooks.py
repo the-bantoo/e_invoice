@@ -102,6 +102,7 @@ doc_events = {
 		"after_insert": "e_invoice.app.set_invoice_qr",
 	},
 	"Sales Invoice": {
+		"after_insert": "e_invoice.app.create_sales_invoice_qr",
 		"on_update": "e_invoice.app.create_sales_invoice_qr",
 	}
 }
