@@ -29,10 +29,8 @@ def create_qr_code(doc, method):
 	"""Create QR Code after inserting Sales Inv
 	"""
 	
-	frappe.errprint('1')
 	region = get_region(doc.company)
 	if region not in ['Saudi Arabia']:
-		frappe.errprint('not saudi')
 		return
 
 	# if QR Code field not present, do nothing
@@ -64,7 +62,8 @@ def create_qr_code(doc, method):
 				'company_name_in_arabic')
 
 			if not seller_name:
-				frappe.throw(_('Arabic name missing for {} in the company document').format(doc.company))
+				frappe.msgprint(_('Arabic name missing for {} in the company document').format(doc.company))
+				seller_name = ""
 
 			tag = bytes([1]).hex()
 			length = bytes([len(seller_name.encode('utf-8'))]).hex()
@@ -74,7 +73,8 @@ def create_qr_code(doc, method):
 			# VAT Number
 			tax_id = frappe.db.get_value('Company', doc.company, 'tax_id')
 			if not tax_id:
-				frappe.throw(_('Tax ID missing for {} in the company document').format(doc.company))
+				frappe.msgprint(_('Tax ID missing for {} in the company document').format(doc.company))
+				tax_id = ""
 
 			tag = bytes([2]).hex()
 			length = bytes([len(tax_id)]).hex()
