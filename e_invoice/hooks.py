@@ -104,7 +104,7 @@ regional_overrides = {
 
 doc_events = {
 	"Sales Invoice": {
-		"on_submit": [
+		"after_insert": [
 			#"erpnext.regional.create_transaction_log",
 			"e_invoice.app.create_qr_code"
 		],
