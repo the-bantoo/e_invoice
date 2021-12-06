@@ -96,13 +96,24 @@ app_license = "MIT"
 # 		"on_trash": "method"
 #	}
 # }
+regional_overrides = {
+	'Saudi Arabia': {
+		'erpnext.controllers.taxes_and_totals.update_itemised_tax_data': 'e_invoice.app.update_itemised_tax_data',
+	}
+}
 
 doc_events = {
-	"POS Invoice": {
-		"after_insert": "e_invoice.app.create_pos_invoice_qr",
-	},
 	"Sales Invoice": {
-		"after_insert": "e_invoice.app.create_sales_invoice_qr"
+		"on_submit": [
+			#"erpnext.regional.create_transaction_log",
+			"e_invoice.app.create_qr_code"
+		],
+		"on_cancel": [
+			"e_invoice.app.delete_qr_code_file"
+		]
+	},
+	"Company": {
+		"on_trash":	"e_invoice.app.delete_vat_settings_for_company"
 	}
 }
 
@@ -181,9 +192,7 @@ user_data_fields = [
 # auth_hooks = [
 # 	"e_invoice.auth.validate"
 # ]
-
-fixtures = [
-	{"dt": "Custom Field", "filters": [
+"""{"dt": "Custom Field", "filters": [
 		[
 			"name", "in", [
 				"Company-company_name_in_arabic",
@@ -201,11 +210,17 @@ fixtures = [
 			]
 		]
 	]},
+"""
+fixtures = [
+	
 	{"dt": "Print Format", "filters": [
 		[
 			"name", "in", [
 				"E-Invoice Saudi",
-				"Saudi VAT Invoice"
+				"Saudi VAT Invoice",
+				'Simplified Tax Invoice', 
+				'Detailed Tax Invoice', 
+				'Tax Invoice'
 			]
 		]
 	]}
