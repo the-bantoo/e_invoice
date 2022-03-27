@@ -24,10 +24,12 @@ def setup(company=None, patch=True):
 	add_permissions()
 	make_custom_fields()
 
-
-def create_qr_code(doc, method):
+@frappe.whitelist()
+def create_qr_code(doc):
 	"""Create QR Code after inserting Sales Inv
 	"""
+
+	doc = frappe.get_doc("Sales Invoice", doc)
 	
 	region = get_region(doc.company)
 	if region not in ['Saudi Arabia']:
@@ -36,11 +38,18 @@ def create_qr_code(doc, method):
 	# if QR Code field not present, do nothing
 	if not hasattr(doc, 'qr_code'):
 		setup()
-
+	else:
+		if doc.get('qr_code'):
+			file_doc = frappe.get_list('File', {
+				'file_url': doc.get('qr_code')
+			})
+			if len(file_doc):
+				frappe.delete_doc('File', file_doc[0].name)
+				
 	# Don't create QR Code if it already exists
-	qr_code = doc.get("qr_code")
-	if qr_code and frappe.db.exists({"doctype": "File", "file_url": qr_code}):
-		return
+	#qr_code = doc.get("qr_code")
+	#if qr_code and frappe.db.exists({"doctype": "File", "file_url": qr_code}):
+	#	return
 
 	meta = frappe.get_meta('Sales Invoice')
 
