@@ -1,0 +1,15 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2022-03-27 13:33:10.279907",
+  "name": "Sales Invoice-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Sales Invoice', {\n    after_save(frm){\n\t    //console.log(\"save\");\n        \n        frappe.call({\n            method: \"e_invoice.app.create_qr_code\",\n            args: {\n                doc: frm.doc.name\n            },\n            callback: (r) => {\n                console.log(r);\n                frm.reload_doc();\n            }\n            \n        });\n    },\n});",
+  "view": "Form"
+ }
+]

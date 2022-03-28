@@ -222,5 +222,13 @@ fixtures = [
 				'Tax Invoice'
 			]
 		]
-	]}
+	]},
+	{"dt": "Client Script", "filters": [
+		[
+			"name", "in", [
+				"Sales Invoice-Form"
+			]
+		]
+	]},
+
 ]
